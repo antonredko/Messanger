@@ -83,8 +83,10 @@ a, span, ::after, ::before{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 2px;
     padding: 10px 30px;
     background-color: #fff;
+    cursor: pointer;
 }
 .user_data{
     width: 25%;
@@ -114,9 +116,12 @@ a, span, ::after, ::before{
 }
 .message_date{
     width: 20%;
-    color: #ccc;
+    color: #bcbaba;
     text-align: right;
 }
 .message_date>:nth-child(n + 2){
     margin-left: 20px;
+}
+.message_not_seen{
+    background-color: #eaf7ff;
 }
