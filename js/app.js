@@ -37,16 +37,12 @@ messagesListEl.addEventListener('click', function(event) {
     if (messageEl) {
         let messageId = messageEl.dataset.id
 
-        MESSAGES.forEach(element => {
-            if (messageId == element.id) {
-                if (!Number(messageEl.dataset.seen)) {
-                    element.seen = true
+        MESSAGES.forEach((el, i, arr) => {
+            if (messageId == el.id) {
+                if (!el.seen) {
+                    arr[i] = { ...arr[i], seen: true }
                 } else {
-                    let elementIndex = MESSAGES.indexOf(element)
-
-                    if (~elementIndex) {
-                        MESSAGES.splice(elementIndex, 1)
-                    }
+                    arr.splice(i, 1)
                 }
             }
         })
@@ -73,24 +69,20 @@ function renderMessages(where, data) {
     let unreadCount = 0
 
     data.sort((a, b) => {
-        return b.date - a.date
-    }).sort((a, b) => {
-        return a.seen - b.seen
+        return a.seen - b.seen || b.date - a.date
     })
 
     data.forEach(element => {
         if (!element.seen) {
             unreadCount++
         }
-            
         html += Message(element)
     })
 
     messagesUnreadCountEl.innerHTML = unreadCount
     messagesAllCountEl.innerHTML = data.length
     
-    where.innerHTML = ""
-    where.insertAdjacentHTML("beforeEnd", html)
+    where.innerHTML = html
 }
 
 

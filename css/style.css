@@ -169,15 +169,17 @@ a, span, ::after, ::before{
 }
 .user_phone{
     margin-top: var(--five_px);
-    font-size: 1.1rem;
     font-weight: 500;
 }
 .message_text{
-    height: 50px;
     color: var(--blue);
     flex: 1;
-    overflow: hidden;
     padding: 0 var(--twenty_px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 .message_date{
     width: 20%;
