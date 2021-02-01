@@ -44,7 +44,7 @@ messagesListEl.addEventListener('click', function(event) {
                 } else {
                     let elementIndex = MESSAGES.indexOf(element)
 
-                    if (elementIndex >= 0) {
+                    if (~elementIndex) {
                         MESSAGES.splice(elementIndex, 1)
                     }
                 }

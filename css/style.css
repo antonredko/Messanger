@@ -2,6 +2,9 @@
     --white: #fff;
     --red: #fc7171;
     --blue: #6ac4fc;
+    --light_blue: #c4e8ff;
+    --five_px: 5px;
+    --twenty_px: 20px;
     --system_font: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 }
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video{
@@ -50,7 +53,7 @@ a, span, ::after, ::before{
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px 0;
+    padding: var(--twenty_px) 0;
 }
 .messages_block{
     box-shadow: 0px 16px 24px 0px rgb(0 0 0/20%);
@@ -60,7 +63,7 @@ a, span, ::after, ::before{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #c4e8ff;
+    background-color: var(--light_blue);
     padding: 10px;
     position: sticky;
     top: 0;
@@ -71,7 +74,7 @@ a, span, ::after, ::before{
     align-items: center;
 }
 .messages_counts>:nth-child(n + 2){
-    margin-left: 20px;
+    margin-left: var(--twenty_px);
 }
 .refresh_btn{
     border: 2px solid #c4e8ff;
@@ -80,14 +83,14 @@ a, span, ::after, ::before{
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: var(--five_px);
     transition: .3s;
-    padding: 5px 10px;
+    padding: var(--five_px) 10px;
 }
 .refresh_btn::before{
     content: '';
-    width: 20px;
-    height: 20px;
+    width: var(--twenty_px);
+    height: var(--twenty_px);
     background: url('../icons/refresh.svg') no-repeat center/contain;
     transition: .3s;
 }
@@ -103,12 +106,12 @@ a, span, ::after, ::before{
 }
 .search_field, .search_btn{
     border: none;
-    padding: 5px 10px;
     cursor: pointer;
     font-size: 1rem
 }
 .search_field{
-    border-radius: 5px 0 0 5px;
+    padding: var(--five_px) 10px;
+    border-radius: var(--five_px) 0 0 var(--five_px);
 }
 .search_field::placeholder{
     transition: .3s;
@@ -125,15 +128,16 @@ a, span, ::after, ::before{
     transition: .3s;
     display: flex;
     align-items: center;
-    border-radius: 0 5px 5px 0;
+    border-radius: 0 var(--five_px) var(--five_px) 0;
+    padding: var(--five_px);
 }
 .search_btn::before{
     content: '';
-    width: 25px;
-    height: 25px;
+    width: var(--twenty_px);
+    height: var(--twenty_px);
     background: url('../icons/search.svg') no-repeat center/cover;
     align-items: center;
-    margin-right: 10px;
+    margin-right: var(--five_px);
 }
 .search_btn:hover{
     background-color: var(--white);
@@ -160,10 +164,11 @@ a, span, ::after, ::before{
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
+    background-color:  var(--white);
 }
 .user_phone{
-    margin-top: 5px;
+    margin-top: var(--five_px);
     font-size: 1.1rem;
     font-weight: 500;
 }
@@ -172,7 +177,7 @@ a, span, ::after, ::before{
     color: var(--blue);
     flex: 1;
     overflow: hidden;
-    padding: 0 20px;
+    padding: 0 var(--twenty_px);
 }
 .message_date{
     width: 20%;
@@ -180,7 +185,7 @@ a, span, ::after, ::before{
     text-align: right;
 }
 .message_date>:nth-child(n + 2){
-    margin-left: 20px;
+    margin-left: var(--twenty_px);
 }
 .message_not_seen{
     background-color: #eaf7ff;
