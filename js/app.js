@@ -50,8 +50,9 @@ messagesListEl.addEventListener('click', function(event) {
                 }
             }
         })
-        renderMessages(this, MESSAGES)
     }
+
+    renderMessages(this, MESSAGES)
 })
 
 
