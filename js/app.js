@@ -9,13 +9,13 @@ const timeFormatter = new Intl.DateTimeFormat(undefined, {
   hour: "2-digit",
   minute: "2-digit"
 })
+const searchFields = ['name', 'message']
 
 
 searchFormEl.addEventListener('submit', function(event) {
     event.preventDefault()
 
     let query = this.search.value.toLowerCase().trim().split(' ')
-    const searchFields = ['name', 'message']
 
     MESSAGES = DATA.filter(message => {
         return query.every(word => {
@@ -51,7 +51,6 @@ messagesListEl.addEventListener('click', function(event) {
             }
         })
     }
-
     renderMessages(this, MESSAGES)
 })
 
