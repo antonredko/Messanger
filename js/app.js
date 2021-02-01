@@ -1,8 +1,9 @@
-const MESSAGES = [...DATA]
+let MESSAGES = [...DATA]
 const messagesListEl = document.getElementById('messagesList')
 const refreshBtnEl = document.getElementById("refreshBtn")
 const messagesAllCountEl = document.getElementById("messagesAllCount")
 const messagesUnreadCountEl = document.getElementById("messagesUnreadCount")
+const searchFormEl = document.getElementById("searchForm")
 const dateFormatter = new Intl.DateTimeFormat()
 const timeFormatter = new Intl.DateTimeFormat(undefined, {
   hour: "2-digit",
@@ -10,31 +11,61 @@ const timeFormatter = new Intl.DateTimeFormat(undefined, {
 })
 
 
+searchFormEl.addEventListener('submit', function(event) {
+    event.preventDefault()
+
+    let query = this.search.value.toLowerCase().trim().split(' ')
+    const searchFields = ['name', 'message']
+
+    MESSAGES = DATA.filter(message => {
+        return query.every(word => {
+            return searchFields.some(field => {
+                return `${message[field]}`.toLowerCase().trim().includes(word)
+            })
+        })
+    })
+    renderMessages(messagesListEl, MESSAGES)
+
+    this.search.blur()
+    this.reset()
+})
+
+
 messagesListEl.addEventListener('click', function(event) {
     let messageEl = event.target.closest(".message_item")
 
-    if (messageEl.classList.contains("message_not_seen")) {
-        messageEl.classList.remove("message_not_seen")
-        messagesUnreadCountEl.innerHTML--
+    if (messageEl) {
+        let messageId = messageEl.dataset.id
+
+        MESSAGES.forEach(element => {
+            if (messageId == element.id) {
+                if (!Number(messageEl.dataset.seen)) {
+                    element.seen = true
+                } else {
+                    let elementIndex = MESSAGES.indexOf(element)
+
+                    if (elementIndex >= 0) {
+                        MESSAGES.splice(elementIndex, 1)
+                    }
+                }
+            }
+        })
+        renderMessages(this, MESSAGES)
     }
 })
 
 
-refreshBtnEl.addEventListener('click', () => {
-    renderMessages(messagesListEl, MESSAGES)
+refreshBtnEl.addEventListener('click', function() {
+    renderMessages(messagesListEl, DATA)
+
+    this.blur()
+
+    searchFormEl.search.blur()
+    searchFormEl.reset()
 })
 
 
 renderMessages(messagesListEl, MESSAGES)
-
-
-function sortingMessages(list) {
-    if (list.children.length) {
-        [...list.children].sort((a, b) => {
-            return a.dataset.seen - b.dataset.seen
-        })
-    }
-}
 
 
 function renderMessages(where, data) {
@@ -42,6 +73,8 @@ function renderMessages(where, data) {
     let unreadCount = 0
 
     data.sort((a, b) => {
+        return b.date - a.date
+    }).sort((a, b) => {
         return a.seen - b.seen
     })
 
@@ -62,7 +95,7 @@ function renderMessages(where, data) {
 
 
 function Message(data) {
-    return `<div class="message_item ${!data.seen ? "message_not_seen" : ""}" data-seen="${data.seen}">
+    return `<div class="message_item ${!data.seen ? "message_not_seen" : ""}" data-seen="${data.seen ? 1 : 0}" data-id="${data.id}">
                 <div class="user_data">
                     <img class="user_avatar" loading="lazy" src="${
                       data.avatar

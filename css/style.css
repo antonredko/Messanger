@@ -37,6 +37,9 @@ a, span, ::after, ::before{
     text-decoration: none;
     color: inherit;
 }
+:focus{
+    outline: 2px solid #6ac4fc;
+}
 .container{
     width: 100%;
     max-width: 1200px;
@@ -45,12 +48,21 @@ a, span, ::after, ::before{
 }
 .messages_block{
     box-shadow: 0px 16px 24px 0px rgb(0 0 0/20%);
+    position: relative;
+}
+.message_header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #c4e8ff;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    left: 0;
 }
 .messages_counts{
     display: flex;
     align-items: center;
-    background-color: #c4e8ff;
-    padding: 10px;
 }
 .messages_counts>:nth-child(n + 2){
     margin-left: 20px;
@@ -73,11 +85,49 @@ a, span, ::after, ::before{
 .refresh_btn:hover::before{
     transform: scale(1.2);
 }
-.refresh_btn:focus{
-    outline: 2px dotted #ccc;
-}
 .messages_unread{
     font-weight: bold;
+}
+.search_form{
+    display: flex;
+}
+.search_field, .search_btn{
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 1rem
+}
+.search_field{
+    border-radius: 5px 0 0 5px;
+}
+.search_field::placeholder{
+    transition: .3s;
+}
+.search_field:focus::placeholder{
+    opacity: 0;
+    transform: translateX(20px);
+}
+.search_btn{
+    font-weight: 700;
+    border: 1px solid  #fc7171;
+    background-color: #fc7171;
+    color: #fff;
+    transition: .3s;
+    display: flex;
+    align-items: center;
+    border-radius: 0 5px 5px 0;
+}
+.search_btn::before{
+    content: '';
+    width: 25px;
+    height: 25px;
+    background: url('../icons/search.svg') no-repeat center/cover;
+    align-items: center;
+    margin-right: 10px;
+}
+.search_btn:hover{
+    background-color: #fff;
+    color: #fc7171;
 }
 .message_item{
     display: flex;

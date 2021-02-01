@@ -11,27 +11,18 @@
     <div id="app">
         <div class="container">
             <div class="messages_block">
-                <div class="messages_counts">
-                    <button class="refresh_btn" id="refreshBtn" aria-label="Обновить список сообщений"></button>
-                    <p class="messages_all">Сообщения - <span id="messagesAllCount"></span></p>
-                    <p class="messages_unread">Непрочитанные - <span id="messagesUnreadCount"></span></p>
+                <div class="message_header">
+                    <div class="messages_counts">
+                        <button class="refresh_btn" id="refreshBtn" aria-label="Обновить список сообщений"></button>
+                        <p class="messages_all">Сообщения - <span id="messagesAllCount"></span></p>
+                        <p class="messages_unread">Непрочитанные - <span id="messagesUnreadCount"></span></p>
+                    </div>
+                    <form name="searchForm" class="search_form" id="searchForm">
+                        <input type="search" name="search" placeholder="Поиск" class="search_field">
+                        <button type="submit" class="search_btn">Найти</button>
+                    </form>
                 </div>
-                <div class="messages_list" id="messagesList">
-                    <!-- <div class="message_item">
-                        <div class="user_data">
-                            <img class="user_avatar" src="https://robohash.org/repellendusimpeditnisi.png?size=50x50&set=set1" alt="" width="1" height="1">
-                            <div class="user_info">
-                                <p class="user_name">Александр Александров</p>
-                                <p class="user_phone">+63 (924) 979-2252</p>
-                            </div>
-                        </div>
-                        <p class="message_text">Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius. Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi. Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.</p>
-                        <p class="message_date">
-                            <span class="message_time">11:20</span>
-                            <span class="message_day">11.20.2020</span>
-                        </p>
-                    </div> -->
-                </div>
+                <div class="messages_list" id="messagesList"></div>
             </div>
         </div>
     </div>
