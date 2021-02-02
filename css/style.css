@@ -87,16 +87,18 @@ a, span, ::after, ::before{
     transition: .3s;
     padding: var(--five_px) 10px;
 }
-.refresh_btn::before{
-    content: '';
-    width: var(--twenty_px);
-    height: var(--twenty_px);
-    background: url('../icons/refresh.svg') no-repeat center/contain;
-    transition: .3s;
-}
 .refresh_btn:hover{
     background-color: var(--white);
     border: 2px solid var(--blue);
+}
+.refresh_icon{
+    width: var(--twenty_px);
+    height: var(--twenty_px);
+    background: url('../icons/refresh.svg') no-repeat center/contain;
+}
+.refresh_icon_rotate{
+    transition: .5s;
+    transform: rotate(-360deg);
 }
 .messages_unread{
     font-weight: bold;

@@ -4,6 +4,7 @@ const refreshBtnEl = document.getElementById("refreshBtn")
 const messagesAllCountEl = document.getElementById("messagesAllCount")
 const messagesUnreadCountEl = document.getElementById("messagesUnreadCount")
 const searchFormEl = document.getElementById("searchForm")
+const refreshIconEl = document.getElementById("refreshIcon")
 const dateFormatter = new Intl.DateTimeFormat()
 const timeFormatter = new Intl.DateTimeFormat(undefined, {
   hour: "2-digit",
@@ -37,12 +38,12 @@ messagesListEl.addEventListener('click', function(event) {
     if (messageEl) {
         let messageId = messageEl.dataset.id
 
-        MESSAGES.forEach((el, i, arr) => {
-            if (messageId == el.id) {
-                if (!el.seen) {
-                    arr[i] = { ...arr[i], seen: true }
+        MESSAGES.forEach((element, i, array) => {
+            if (messageId == element.id) {
+                if (!element.seen) {
+                    array[i] = { ...array[i], seen: true }
                 } else {
-                    arr.splice(i, 1)
+                    array.splice(i, 1)
                 }
             }
         })
@@ -52,12 +53,18 @@ messagesListEl.addEventListener('click', function(event) {
 
 
 refreshBtnEl.addEventListener('click', function() {
+    refreshIconEl.classList.add('refresh_icon_rotate')
+
     renderMessages(messagesListEl, DATA)
+    MESSAGES = [...DATA]
 
     this.blur()
-
     searchFormEl.search.blur()
     searchFormEl.reset()
+
+    setTimeout(() => {
+        refreshIconEl.classList.remove('refresh_icon_rotate')
+    }, 500)
 })
 
 
