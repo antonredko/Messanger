@@ -20,7 +20,7 @@ getData()
 searchFormEl.addEventListener('submit', function(event) {
     event.preventDefault()
 
-    let query = this.search.value.toLowerCase().trim().split(' ')
+    const query = this.search.value.toLowerCase().trim().split(' ')
 
     MESSAGES = DATA.filter(message => {
         return query.every(word => {
@@ -37,22 +37,28 @@ searchFormEl.addEventListener('submit', function(event) {
 
 
 messagesListEl.addEventListener('click', function(event) {
-    let messageEl = event.target.closest(".message_item")
+    const messageEl = event.target.closest(".message_item")
 
     if (messageEl) {
-        let messageId = messageEl.dataset.id
+        const messageTextEl = messageEl.querySelector('.message_text')
 
-        MESSAGES.forEach((element, i, array) => {
-            if (messageId == element.id) {
-                if (!element.seen) {
-                    array[i] = { ...array[i], seen: true }
-                } else {
-                    array.splice(i, 1)
+        if (messageTextEl && messageTextEl.classList.contains('message_text_hidden')) {
+            messageTextEl.classList.remove('message_text_hidden')
+        } else {
+            const messageId = messageEl.dataset.id
+
+            MESSAGES.forEach((element, i, array) => {
+                if (messageId == element.id) {
+                    if (!element.seen) {
+                        array[i] = { ...array[i], seen: true }
+                    } else {
+                        array.splice(i, 1)
+                    }
                 }
-            }
-        })
+            })
+            renderMessages(this, MESSAGES)
+        }
     }
-    renderMessages(this, MESSAGES)
 })
 
 
@@ -104,7 +110,9 @@ function Message(data) {
                         <p class="user_phone">${data.phone}</p>
                     </div>
                 </div>
-                <p class="message_text">${data.message}</p>
+                <p class="message_text message_text_hidden">
+                    ${data.message}
+                </p>
                 <p class="message_date">
                     <span class="message_time">${timeFormatter.format(data.date)}</span>
                     <span class="message_day">${dateFormatter.format(data.date)}</span>

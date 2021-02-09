@@ -3,6 +3,7 @@
     --red: #fc7171;
     --blue: #6ac4fc;
     --light_blue: #c4e8ff;
+    --green: #5ac44c;
     --five_px: 5px;
     --twenty_px: 20px;
     --system_font: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
@@ -51,7 +52,7 @@ a, span, ::after, ::before{
 }
 .container{
     width: 100%;
-    max-width: 1200px;
+    max-width: 1320px;
     margin: 0 auto;
     padding: var(--twenty_px) 0;
 }
@@ -146,6 +147,7 @@ a, span, ::after, ::before{
     color: var(--red);
 }
 .message_item{
+    height: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -164,7 +166,7 @@ a, span, ::after, ::before{
 }
 .user_avatar{
     width: 50px;
-    height: 50px;
+    height: auto;
     border-radius: 50%;
     border: 2px solid #ccc;
     background-color:  var(--white);
@@ -177,6 +179,8 @@ a, span, ::after, ::before{
     color: var(--blue);
     flex: 1;
     padding: 0 var(--twenty_px);
+}
+.message_text_hidden{
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -194,3 +198,12 @@ a, span, ::after, ::before{
 .message_not_seen{
     background-color: #eaf7ff;
 }
+
+
+
+
+/* @media (max-width: 575.98px) { ... }
+@media (max-width: 767.98px) { ... }
+@media (max-width: 991.98px) { ... }
+@media (max-width: 1199.98px) { ... }
+@media (max-width: 1399.98px) { ... } */
