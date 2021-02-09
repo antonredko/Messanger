@@ -1,3 +1,4 @@
+let DATA = []
 let MESSAGES = []
 const messagesListEl = document.getElementById('messagesList')
 const refreshBtnEl = document.getElementById("refreshBtn")
@@ -65,8 +66,9 @@ refreshBtnEl.addEventListener('click', function() {
     searchFormEl.search.blur()
     searchFormEl.reset()
 
-    setTimeout(() => {
+    const timer = setTimeout(() => {
         refreshIconEl.classList.remove('refresh_icon_rotate')
+        clearTimeout(timer)
     }, 500)
 })
 
@@ -96,9 +98,7 @@ function renderMessages(where, data) {
 function Message(data) {
     return `<div class="message_item ${!data.seen ? "message_not_seen" : ""}" data-seen="${data.seen ? 1 : 0}" data-id="${data.id}">
                 <div class="user_data">
-                    <img class="user_avatar" loading="lazy" src="${
-                      data.avatar
-                    }" alt="${data.avatar} ${data.phone}" width="1" height="1">
+                    <img class="user_avatar" loading="lazy" src="${data.avatar}" alt="${data.avatar} ${data.phone}" width="1" height="1">
                     <div class="user_info">
                         <p class="user_name">${data.name}</p>
                         <p class="user_phone">${data.phone}</p>
@@ -106,12 +106,8 @@ function Message(data) {
                 </div>
                 <p class="message_text">${data.message}</p>
                 <p class="message_date">
-                    <span class="message_time">${timeFormatter.format(
-                      data.date
-                    )}</span>
-                    <span class="message_day">${dateFormatter.format(
-                      data.date
-                    )}</span>
+                    <span class="message_time">${timeFormatter.format(data.date)}</span>
+                    <span class="message_day">${dateFormatter.format(data.date)}</span>
                 </p>
             </div>`;
 }
@@ -121,6 +117,7 @@ async function getData() {
     try {
         const response = await fetch('/Messanger/data/senders.json')
         const data = await response.json()
+        DATA = [...data]
         MESSAGES = [...data]
         renderMessages(messagesListEl, MESSAGES)
     } catch (error) {
