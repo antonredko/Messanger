@@ -1,4 +1,4 @@
-let MESSAGES = [...DATA]
+let MESSAGES = []
 const messagesListEl = document.getElementById('messagesList')
 const refreshBtnEl = document.getElementById("refreshBtn")
 const messagesAllCountEl = document.getElementById("messagesAllCount")
@@ -11,6 +11,9 @@ const timeFormatter = new Intl.DateTimeFormat(undefined, {
   minute: "2-digit"
 })
 const searchFields = ['name', 'message']
+
+
+getData()
 
 
 searchFormEl.addEventListener('submit', function(event) {
@@ -68,9 +71,6 @@ refreshBtnEl.addEventListener('click', function() {
 })
 
 
-renderMessages(messagesListEl, MESSAGES)
-
-
 function renderMessages(where, data) {
     let html = ''
     let unreadCount = 0
@@ -114,4 +114,16 @@ function Message(data) {
                     )}</span>
                 </p>
             </div>`;
+}
+
+
+async function getData() {
+    try {
+        const response = await fetch('/Messanger/data/senders.json')
+        const data = await response.json()
+        MESSAGES = [...data]
+        renderMessages(messagesListEl, MESSAGES)
+    } catch (error) {
+        console.warn(error)
+    }
 }
